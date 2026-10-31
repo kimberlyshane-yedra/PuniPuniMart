@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart'; //Material Library
+import 'package:flutter/material.dart'; // Material Library
 import 'Home.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'PuniPuniCart',
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.pink,
+        scaffoldBackgroundColor: const Color(0xFFCCFBFA), // Pastel Cyan background para buong app
       ),
       home: const LoginScreen(),
     );
@@ -51,15 +53,14 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     }
   }
-    
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFCCFBFA), // Pastel Cyan background
       appBar: AppBar(
         title: const Text('PuniPuniCart'),
-        backgroundColor: const Color.fromARGB(255, 255, 64, 207),
+        backgroundColor: const Color(0xFFF29191), // Primary Pink color
         foregroundColor: Colors.white,
       ),
       body: Center(
@@ -73,34 +74,39 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'PuniPuniCar',
+                    'PuniPuniCart',
                     style: TextStyle(
                       fontSize: 32,
-                      color: Colors.deepOrange,
+                      color: Color(0xFFF29191), // Primary Pink color
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const Text(
                     'Squishy Collectibles Store',
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                    style: TextStyle(fontSize: 14, color: Color(0xFFF7ADAD)),
                   ),
                   const SizedBox(height: 30),
 
-                  // username Field
+                  // Username Field
                   TextFormField(
                     controller: _usernameController,
                     keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Username',
                       hintText: 'Enter username',
-                      prefixIcon: Icon(Icons.person),
-                      border: OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.person, color: Color(0xFFF29191)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter an username';
                       }
-                      if (value.contains (RegExp(r'[!@#\$&*~%^()+=\-\[\]\/{}|:;<>,.?\s]'))) {
+                      if (value.contains(RegExp(r'[!@#\$&*~%^()+=\-\[\]\/{}|:;<>,.?\s]'))) {
                         return 'Please enter a valid username';
                       }
                       return null;
@@ -112,11 +118,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextFormField(
                     controller: _passwordController,
                     obscureText: true,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Password',
                       hintText: 'Enter password',
-                      prefixIcon: Icon(Icons.lock),
-                      border: OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.lock, color: Color(0xFFF29191)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -136,11 +147,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: ElevatedButton(
                       onPressed: _login,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepOrangeAccent,
+                        backgroundColor: const Color(0xFFF29191), // Primary Pink color
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      child: const Text('Login', style: TextStyle(fontSize: 18)),
+                      child: const Text('Login', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     ),
                   ),
                   const SizedBox(height: 15),
@@ -157,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     child: const Text(
                       'Don\'t have an account? Register here',
-                      style: TextStyle(color: Colors.deepOrange),
+                      style: TextStyle(color: Color(0xFFF29191), fontWeight: FontWeight.w600),
                     ),
                   ),
                 ],
@@ -199,7 +213,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Registration successful! Please log in.')),
       );
-      // Bumalik sa Login screen pagka-register
       Navigator.pop(context);
     }
   }
@@ -207,9 +220,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFCCFBFA), // Pastel Cyan background
       appBar: AppBar(
         title: const Text('PuniPuniCart'),
-        backgroundColor: const Color.fromARGB(255, 255, 64, 207),
+        backgroundColor: const Color(0xFFF29191), // Primary Pink color
         foregroundColor: Colors.white,
       ),
       body: Center(
@@ -226,7 +240,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     'Create Account',
                     style: TextStyle(
                       fontSize: 32,
-                      color: Colors.deepOrange,
+                      color: Color(0xFFF29191), // Primary Pink color
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -236,11 +250,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   TextFormField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Email',
                       hintText: 'Enter your email',
-                      prefixIcon: Icon(Icons.email),
-                      border: OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.email, color: Color(0xFFF29191)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -254,37 +273,47 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                TextFormField(
-                   controller: _usernameController,
-                   obscureText: false, // to see  the username
-                   decoration: const InputDecoration(
-                     labelText: 'Username',
-                     hintText: 'Enter username', 
-                     prefixIcon: Icon(Icons.person),
-                     border: OutlineInputBorder(),
-                   ),
-                   validator: (value) {
-                     if (value == null || value.isEmpty) {
-                       return 'Please enter a username'; // Pinalitan ang error message
-                     }
-                     if (value.contains(RegExp(r'[!@#\$&*~%^()+=\-\[\]\/{}|:;<>,.?\s]'))) {
-                       return 'Please enter a valid username';
-                     }
-                     return null;
-                   },
-                 ),
-                 
-                 const SizedBox(height: 20),
-                
+                  // Username Field
+                  TextFormField(
+                    controller: _usernameController,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: 'Username',
+                      hintText: 'Enter username',
+                      prefixIcon: const Icon(Icons.person, color: Color(0xFFF29191)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a username';
+                      }
+                      if (value.contains(RegExp(r'[!@#\$&*~%^()+=\-\[\]\/{}|:;<>,.?\s]'))) {
+                        return 'Please enter a valid username';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 20),
+
                   // Password Field
                   TextFormField(
                     controller: _passwordController,
                     obscureText: true,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Password',
                       hintText: 'Enter password (min. 6 chars)',
-                      prefixIcon: Icon(Icons.lock),
-                      border: OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.lock, color: Color(0xFFF29191)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -302,11 +331,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   TextFormField(
                     controller: _confirmPasswordController,
                     obscureText: true,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Confirm Password',
                       hintText: 'Re-enter your password',
-                      prefixIcon: Icon(Icons.lock_outline),
-                      border: OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.lock_outline, color: Color(0xFFF29191)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide.none,
+                      ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -326,11 +360,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: ElevatedButton(
                       onPressed: _register,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepOrangeAccent,
+                        backgroundColor: const Color(0xFFF29191), // Primary Pink color
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      child: const Text('Register', style: TextStyle(fontSize: 18)),
+                      child: const Text('Register', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     ),
                   ),
                   const SizedBox(height: 15),
@@ -342,7 +379,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                     child: const Text(
                       'Already have an account? Login here',
-                      style: TextStyle(color: Colors.deepOrange),
+                      style: TextStyle(color: Color(0xFFF29191), fontWeight: FontWeight.w600),
                     ),
                   ),
                 ],
