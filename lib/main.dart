@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart'; //Material Library
-import 'Catalog.dart';
+import 'Home.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PuniPuniCar'),
+        title: const Text('PuniPuniCart'),
         backgroundColor: const Color.fromARGB(255, 255, 64, 207),
         foregroundColor: Colors.white,
       ),
