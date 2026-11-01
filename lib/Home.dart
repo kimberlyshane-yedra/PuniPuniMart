@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart'; // Material Library
+import 'Cart.dart';
+import 'Catalog.dart';
+import 'Checkout.dart';
+import 'UserAcct.dart';
 
 // ==================== PRODUCT MODEL ====================
 class ProductItem {
@@ -25,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
 
-  //  Taba Squishies
+  // Taba Squishies
   final List<ProductItem> _allTabaProducts = [
     ProductItem(name: 'Small Paw Taba Squishy', price: '₱150.00', imagePath: 'assets/images/taba1.jpg'),
     ProductItem(name: 'Bear Taba Squishy', price: '₱160.00', imagePath: 'assets/images/taba2.webp'),
@@ -34,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ProductItem(name: 'Oreo Taba Squishy', price: '₱190.00', imagePath: 'assets/images/taba5.jpg'),
   ];
 
-  //  Slow Squishies
+  // Slow Squishies
   final List<ProductItem> _allSlowProducts = [
     ProductItem(name: 'Chocolate Bar Squishy', price: '₱200.00', imagePath: 'assets/images/slow1.jpg'),
     ProductItem(name: 'Rabit Squishy', price: '₱210.00', imagePath: 'assets/images/slow2.jpg'),
@@ -51,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Search bar
+    // Search bar filtering
     final filteredTabaProducts = _allTabaProducts.where((product) {
       return product.name.toLowerCase().contains(_searchQuery.toLowerCase());
     }).toList();
@@ -69,17 +73,35 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: const Color(0xFFF29191), // Palette color
         foregroundColor: Colors.white,
         actions: [
+          // Cart Navigation
           IconButton(
             icon: const Icon(Icons.shopping_cart),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CartScreen()),
+              );
+            },
           ),
+          // Payment / Checkout Navigation
           IconButton(
             icon: const Icon(Icons.payment),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CheckoutScreen()),
+              );
+            },
           ),
+          // User Account Navigation
           IconButton(
             icon: const Icon(Icons.person),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserAcctScreen()),
+              );
+            },
           ),
         ],
       ),
@@ -92,13 +114,13 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const Center(
               child: Text(
-              'Welcome to PuniPuniCart!',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFFF29191),
+                'Welcome to PuniPuniCart!',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFF29191),
+                ),
               ),
-            ),
             ),
             const SizedBox(height: 15),
 
@@ -200,7 +222,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: InkWell(
-                    onTap: () {},
+                    borderRadius: BorderRadius.circular(12),
+                    // ==================== INDIVIDUAL PRODUCT CLICK ====================
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CatalogScreen(
+                            productName: product.name,
+                            productPrice: product.price,
+                            productDescription: product.name,
+                            productImage: product.imagePath,
+                          ),
+                        ),
+                      );
+                    },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
