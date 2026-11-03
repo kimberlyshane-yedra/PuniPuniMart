@@ -205,9 +205,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         const SizedBox(height: 10),
-        SizedBox(
+        SizedBox(//size box for the size of the product
           height: 210, // Saktong taas ng card 
-          child: ListView.builder(
+          child: ListView.builder(// listview widget for horizontal scroll
             scrollDirection: Axis.horizontal, // Pahalang na swipe para sa items
             itemCount: products.length,
             itemBuilder: (context, index) {
