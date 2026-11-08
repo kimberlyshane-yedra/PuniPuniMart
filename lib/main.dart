@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart'; // Material Library
 import 'Home.dart';
+import 'AppStore.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'PuniPuniCart',
+      routes: {'/login': (context) => const LoginScreen()},
       theme: ThemeData(
         primarySwatch: Colors.pink,
         scaffoldBackgroundColor: const Color(0xFFCCFBFA), // Pastel Cyan background para buong app
@@ -43,17 +45,22 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _login() {
-    if (_formKey.currentState!.validate()) {
+    if (!_formKey.currentState!.validate()) return;
+    final signedIn = AppStore.instance.signIn(
+      username: _usernameController.text,
+      password: _passwordController.text,
+    );
+    if (!signedIn) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login successful! Welcome to PuniPuniCart')),
+        const SnackBar(content: Text('Username or password is incorrect.')),
       );
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
+      return;
     }
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const HomeScreen()),
+    );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -209,14 +216,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void _register() {
-    if (_formKey.currentState!.validate()) {
+    if (!_formKey.currentState!.validate()) return;
+    final error = AppStore.instance.register(
+      username: _usernameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+    if (error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Registration successful! Please log in.')),
+        SnackBar(content: Text(error)),
       );
-      Navigator.pop(context);
+      return;
     }
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Account created. Please sign in.')),
+    );
+    Navigator.pop(context);
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

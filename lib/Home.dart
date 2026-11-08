@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart'; // Material Library
+
 import 'Cart.dart';
 import 'Catalog.dart';
 import 'Checkout.dart';
@@ -31,20 +32,60 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Taba Squishies
   final List<ProductItem> _allTabaProducts = [
-    ProductItem(name: 'Small Paw Taba Squishy', price: '₱150.00', imagePath: 'assets/images/taba1.jpg'),
-    ProductItem(name: 'Bear Taba Squishy', price: '₱160.00', imagePath: 'assets/images/taba2.webp'),
-    ProductItem(name: 'Banana Taba Squishy', price: '₱170.00', imagePath: 'assets/images/taba3.jpg'),
-    ProductItem(name: 'Donut Taba Squishy', price: '₱180.00', imagePath: 'assets/images/taba4.jpg'),
-    ProductItem(name: 'Oreo Taba Squishy', price: '₱190.00', imagePath: 'assets/images/taba5.jpg'),
+    ProductItem(
+      name: 'Small Paw Taba Squishy',
+      price: '₱150.00',
+      imagePath: 'assets/images/taba1.jpg',
+    ),
+    ProductItem(
+      name: 'Bear Taba Squishy',
+      price: '₱160.00',
+      imagePath: 'assets/images/taba2.webp',
+    ),
+    ProductItem(
+      name: 'Banana Taba Squishy',
+      price: '₱170.00',
+      imagePath: 'assets/images/taba3.jpg',
+    ),
+    ProductItem(
+      name: 'Donut Taba Squishy',
+      price: '₱180.00',
+      imagePath: 'assets/images/taba4.jpg',
+    ),
+    ProductItem(
+      name: 'Oreo Taba Squishy',
+      price: '₱190.00',
+      imagePath: 'assets/images/taba5.jpg',
+    ),
   ];
 
   // Slow Squishies
   final List<ProductItem> _allSlowProducts = [
-    ProductItem(name: 'Chocolate Bar Squishy', price: '₱200.00', imagePath: 'assets/images/slow1.jpg'),
-    ProductItem(name: 'Rabit Squishy', price: '₱210.00', imagePath: 'assets/images/slow2.jpg'),
-    ProductItem(name: 'Star Squishy', price: '₱220.00', imagePath: 'assets/images/slow3.jpg'),
-    ProductItem(name: 'Cheese Squishy', price: '₱230.00', imagePath: 'assets/images/slow4.jpg'),
-    ProductItem(name: 'Bread Squishy', price: '₱240.00', imagePath: 'assets/images/slow5.jpg'),
+    ProductItem(
+      name: 'Chocolate Bar Squishy',
+      price: '₱200.00',
+      imagePath: 'assets/images/slow1.jpg',
+    ),
+    ProductItem(
+      name: 'Rabit Squishy',
+      price: '₱210.00',
+      imagePath: 'assets/images/slow2.jpg',
+    ),
+    ProductItem(
+      name: 'Star Squishy',
+      price: '₱220.00',
+      imagePath: 'assets/images/slow3.jpg',
+    ),
+    ProductItem(
+      name: 'Cheese Squishy',
+      price: '₱230.00',
+      imagePath: 'assets/images/slow4.jpg',
+    ),
+    ProductItem(
+      name: 'Bread Squishy',
+      price: '₱240.00',
+      imagePath: 'assets/images/slow5.jpg',
+    ),
   ];
 
   @override
@@ -66,7 +107,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFCCFBFA), // Pastel Cyan background
-      
       // ==================== APPBAR ====================
       appBar: AppBar(
         title: const Text('PuniPuniCart'),
@@ -112,17 +152,21 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
-              child: Text(
-                'Welcome to PuniPuniCart!',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFF29191),
+            SizedBox(
+              width: double.infinity,
+              height: 140,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(
+                  'assets/images/punipuni_banner.png',
+                  width: double.infinity,
+                  height: 140,
+                  fit: BoxFit.cover,
+                  alignment: const Alignment(0, 0.3),
                 ),
               ),
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 12),
 
             // ==================== SEARCH BAR ====================
             TextField(
@@ -159,14 +203,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // 1. TABA SQUISHY CATEGORY (Horizontal Scroll)
             if (filteredTabaProducts.isNotEmpty)
-              _buildCategorySection('Taba Squishy Category', filteredTabaProducts),
+              _buildCategorySection(
+                'Taba Squishy Category',
+                filteredTabaProducts,
+              ),
 
-            if (filteredTabaProducts.isNotEmpty && filteredSlowProducts.isNotEmpty)
+            if (filteredTabaProducts.isNotEmpty &&
+                filteredSlowProducts.isNotEmpty)
               const SizedBox(height: 25),
 
             // 2. SLOW SQUISHY CATEGORY (Horizontal Scroll)
             if (filteredSlowProducts.isNotEmpty)
-              _buildCategorySection('Slow Rise Squishy Category', filteredSlowProducts),
+              _buildCategorySection(
+                'Slow Rise Squishy Category',
+                filteredSlowProducts,
+              ),
 
             // Kung walang nahanap
             if (filteredTabaProducts.isEmpty && filteredSlowProducts.isEmpty)
@@ -193,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Reusable widget para sa bawat category na may sariling horizontal scroll
   Widget _buildCategorySection(String title, List<ProductItem> products) {
-    return Column( 
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -205,15 +256,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         const SizedBox(height: 10),
-        SizedBox(//size box for the size of the product
-          height: 210, // Saktong taas ng card 
-          child: ListView.builder(// listview widget for horizontal scroll
+        SizedBox(
+          //size box for the size of the product
+          height: 210, // Saktong taas ng card
+          child: ListView.builder(
+            // listview widget for horizontal scroll
             scrollDirection: Axis.horizontal, // Pahalang na swipe para sa items
             itemCount: products.length,
             itemBuilder: (context, index) {
               final product = products[index];
               return Container(
-                width: 140, 
+                width: 140,
                 margin: const EdgeInsets.only(right: 12),
                 child: Card(
                   color: Colors.white,
@@ -243,7 +296,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         // images
                         Expanded(
                           child: ClipRRect(
-                            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                            borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(12),
+                            ),
                             child: Container(
                               color: const Color(0xFFB1E5E6),
                               width: double.infinity,
@@ -251,7 +306,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 product.imagePath,
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) {
-                                  return const Icon(Icons.image, color: Colors.white, size: 40);
+                                  return const Icon(
+                                    Icons.image,
+                                    color: Colors.white,
+                                    size: 40,
+                                  );
                                 },
                               ),
                             ),
