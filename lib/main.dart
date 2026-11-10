@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       suffixIcon: IconButton(
                         tooltip: _isPasswordVisible
-                            ? 'Hide password'
+                            ? 'Hide password'//if want hide password - Kim
                             : 'Show password',
                         onPressed: () => setState(
                           () => _isPasswordVisible = !_isPasswordVisible,
